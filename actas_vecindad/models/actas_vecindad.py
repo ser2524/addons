@@ -13,6 +13,8 @@ class actas(models.Model):
     calificacion= fields.Selection(string='Calificación', selection=[('alto', 'Alto'), ('Medio', 'Medio'), ('Bajo', 'Bajo'),])
     active = fields.Boolean(string='es activo', default = True)
     notas_estado = fields.Text(string='Estado Inmueble') 
+    afectacion = fields.Integer('Afectación',related='afectacion_view')
+    afectacion_view = fields.Integer('Afectación')
     conflicto = fields.Boolean(string ='¿Es Usuario conflictivo?')
     documento = fields.Binary(string='Documento')
     valor_inmueble = fields.Float(string='Valor Comercial')

@@ -6,16 +6,20 @@
         <field name="model">actas_vecindad</field>
         <field name="arch" type="xml">
             <form string="Actas">
-                              
+
                 <sheet>
                 <widget name="web_ribbon" title= "Archivado" bg_color ="bg-danger" attrs ="{'invisible':[('active','=',True),]}"/>
                 <field name="image_1920" widget="image" class="oe_avatar"   />
                 <!-- options="{'preview_image':'image_128'}" -->
-                <center> <h1>Actas</h1></center>
 
+                <!-- PONER ICONO BUSCAR EN FONTAWESOME EN INTERNET -->
+                 
                 <group >
+                    
                      <group>
-                       <field name="name"></field> 
+                        <h1>Actas</h1>
+                       <div class="oe_title" ><h2><field name="name" placeholder="ACTA N°"  required="1" default ="1" ></field> </h2> </div>               
+               
                        <field name="usuario_id"></field> 
                        <field name="fecha_acta"></field> 
                        
@@ -24,12 +28,18 @@
                         <field name="tipo_uso"></field>
                         <field name="valor_inmueble"></field>                        
                         <field name="notas_estado"></field>
+
+                        <field name="afectacion_view" string=" Afectación  "     class="oe_edit_only"  ></field>                        
+                        <field name="afectacion" widget="percentpie" string=" Afectación  "></field>                        
+                        <!--para poder presentar el percent pie se requiere un campo adicional en el modelo y ponerle un atribito related=  -->
+                        
                         <field name="active" invisible ="1"></field>
 
                      </group>
                 </group>
                                    
                 </sheet>
+               
             </form>
         </field>
     </record>
