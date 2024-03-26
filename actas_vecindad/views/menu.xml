@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="actas_action" model="ir.actions.act_window">
+        <field name="name">Actas</field>
+        <field name="res_model">actas_vecindad</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+     <record id="tipo_actas_action" model="ir.actions.act_window">
+        <field name="name">Tipo Uso</field>
+        <field name="res_model">tipo_uso</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem  id="actas_main_menu" name="Actas vecindad" />
+    <menuitem  id="actas_horizontal_menu" name=" Mis actas" parent ="actas_main_menu" action ="actas_action" />
+    <menuitem  id="actas_tipo_menu" name=" Tipo Uso" parent ="actas_main_menu" action ="tipo_actas_action" />
+
+ 
+</odoo>

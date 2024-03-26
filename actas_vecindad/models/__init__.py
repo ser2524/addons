@@ -1,0 +1,1 @@
+from . import actas_vecindad,actas_category

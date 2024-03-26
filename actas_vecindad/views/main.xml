@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="actas_view_form" model="ir.ui.view">
+        <field name="name">actas.view.form</field>
+        <field name="model">actas_vecindad</field>
+        <field name="arch" type="xml">
+            <form string="Actas">
+                              
+                <sheet>
+                <widget name="web_ribbon" title= "Archivado" bg_color ="bg-danger" attrs ="{'invisible':[('active','=',True),]}"/>
+                <field name="image_1920" widget="image" class="oe_avatar"   />
+                <!-- options="{'preview_image':'image_128'}" -->
+                <center> <h1>Actas</h1></center>
+
+                <group >
+                     <group>
+                       <field name="name"></field> 
+                       <field name="usuario_id"></field> 
+                       <field name="fecha_acta"></field> 
+                       
+                     </group>
+                     <group>
+                        <field name="tipo_uso"></field>
+                        <field name="valor_inmueble"></field>                        
+                        <field name="notas_estado"></field>
+                        <field name="active" invisible ="1"></field>
+
+                     </group>
+                </group>
+                                   
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
