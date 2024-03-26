@@ -1,1 +1,1 @@
-from . import lotes
+from . import main

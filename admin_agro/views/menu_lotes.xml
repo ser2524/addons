@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <odoo>
+    <record id="segundo_lotes_action" model="ir.actions.act_window">
+        <field name="name">Lotes</field>
+        <field name="res_model">main_agro</field>
+        <field name="view_mode">tree,form</field>
+        </record>
 
+    <menuitem  id="lote_menu" name="Agro"/>
+    <menuitem  id="sub_horizontal_lote_menu" name=" Mis Lotes" parent ="lote_menu"/>
+    <menuitem  id="sub_vertical_lote_menu" name="Detalle Lotes" parent ="sub_horizontal_lote_menu" action ="segundo_lotes_action"/>
     
-
 </odoo>
