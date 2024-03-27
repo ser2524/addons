@@ -12,30 +12,41 @@
                 <field name="image_1920" widget="image" class="oe_avatar"   />
                 <!-- options="{'preview_image':'image_128'}" -->
 
-                <!-- PONER ICONO BUSCAR EN FONTAWESOME EN INTERNET -->
-                 
+                <!-- PONER ICONO BUSCAR EN FONTAWESOME 4.7 EN INTERNET -->
+                <!-- <span class="fa fa-circle"></span>    -->
+                <h1>Actas</h1>
+                <div class="oe_title" ><h2><field name="name" placeholder="ACTA N°"  required="1" default ="1" ></field> </h2> </div>               
+                                       
                 <group >
                     
                      <group>
-                        <h1>Actas</h1>
-                       <div class="oe_title" ><h2><field name="name" placeholder="ACTA N°"  required="1" default ="1" ></field> </h2> </div>               
-               
-                       <field name="usuario_id"></field> 
+                        <field name="usuario_id"></field> 
                        <field name="fecha_acta"></field> 
                        
                      </group>
                      <group>
-                        <field name="tipo_uso"></field>
+                        <field name="tipo_uso" ></field>
                         <field name="valor_inmueble"></field>                        
                         <field name="notas_estado"></field>
 
                         <field name="afectacion_view" string=" Afectación  "     class="oe_edit_only"  ></field>                        
                         <field name="afectacion" widget="percentpie" string=" Afectación  "></field>                        
                         <!--para poder presentar el percent pie se requiere un campo adicional en el modelo y ponerle un atribito related=  -->
-                        
                         <field name="active" invisible ="1"></field>
 
                      </group>
+                     
+                </group>
+                <group  string="Evidencias" class="oe_title">
+                    <group >
+                        <field name="encargado" string="  "></field>
+                    </group>
+                    <group >
+
+                    <field name="documento"/>
+                    <field name="conflicto"/>
+                    </group>
+                    
                 </group>
                                    
                 </sheet>
