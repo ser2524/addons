@@ -41,8 +41,8 @@
                     <group >
                         <field name="encargado" string="  "></field>
                     </group>
+                    
                     <group >
-
                     <field name="documento"/>
                     <field name="conflicto"/>
                     </group>

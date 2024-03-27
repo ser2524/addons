@@ -9,7 +9,7 @@ class actas(models.Model):
     usuario_id = fields.Many2one(comodel_name='res.partner', string='Usuario') #EL CMODEL ES EL LLAMADO DEL CAMPO   
     fecha_acta = fields.Date(string='Fecha Acta')
     numero_obreros = fields.Integer(string='Numero Obreros')
-    tipo_uso = fields.Many2one(comodel_name='tipo_uso', string='Tipo De Uso') 
+    tipo_uso = fields.Many2one(comodel_name='tipo_uso', string='Tipo De Uso')         
     encargado = fields.Many2many(comodel_name='encargado')            
     calificacion= fields.Selection(string='Calificación', selection=[('alto', 'Alto'), ('Medio', 'Medio'), ('Bajo', 'Bajo'),])
     active = fields.Boolean(string='es activo', default = True)

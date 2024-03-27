@@ -13,6 +13,7 @@ class encargado(models.Model):
     _name = 'encargado'
     _description = 'encargado'
     name = fields.Char(string='Observaciones')
+        
     
     
     
