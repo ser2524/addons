@@ -13,6 +13,19 @@ class encargado(models.Model):
     _name = 'encargado'
     _description = 'encargado'
     name = fields.Char(string='Observaciones')
+
+
+
+class imagenes(models.Model):
+    _name = 'imagenes_binario'
+    _description = 'imagenes' 
+    name = fields.Char(string='')
+    _inherit =['image.mixin']       
+    actas = fields.Binary(
+        string='actas',            
+    )
+    
+    
         
     
     

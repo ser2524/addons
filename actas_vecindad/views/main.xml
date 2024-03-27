@@ -5,9 +5,18 @@
         <field name="name">actas.view.form</field>
         <field name="model">actas_vecindad</field>
         <field name="arch" type="xml">
+              <header style="display:flex">
+              <button string="Activo" name="activo" type="object" class="oe_highlight"/>
+              <button string="Cancelado" name="cancelado" type="object"/>
+              <field name="state" 
+                widget="statusbar" statusbar_visible="nuevo,activo" 
+                ></field>
+                
+                </header>
             <form string="Actas">
-
+                
                 <sheet>
+                <!-- el witget web_ribbon es para crear la cinta  -->
                 <widget name="web_ribbon" title= "Archivado" bg_color ="bg-danger" attrs ="{'invisible':[('active','=',True),]}"/>
                 <field name="image_1920" widget="image" class="oe_avatar"   />
                 <!-- options="{'preview_image':'image_128'}" -->
@@ -19,12 +28,18 @@
                                        
                 <group >
                     
-                     <group>
-                        <field name="usuario_id"></field> 
+                      <group>
+                       
+                        <field name="usuario_id"  domain="[('category_id', 'in', [encargado_user])]" ></field>
+                        <!-- lo que se usua es que se evalua el nombre del campo que requiero  -->
+                        <!-- para crear dominios se utiliza []esto crea un filtro segun la condicion  que necesitemos -->
+                        
+                        <field name="encargado_user"/>
+                        
                        <field name="fecha_acta"></field> 
                        
-                     </group>
-                     <group>
+                      </group>
+                      <group>
                         <field name="tipo_uso" ></field>
                         <field name="valor_inmueble"></field>                        
                         <field name="notas_estado"></field>
@@ -37,18 +52,28 @@
                      </group>
                      
                 </group>
-                <group  string="Evidencias" class="oe_title">
-                    <group >
-                        <field name="encargado" string="  "></field>
-                    </group>
-                    
-                    <group >
-                    <field name="documento"/>
-                    <field name="conflicto"/>
-                    </group>
-                    
+                <group  string="Evidencias" style="display:flex">
+                 <group >
+                    <field name="encargado" string=""></field>
+                    <field name="imagen_name" invisible="1"></field>
+                    <field name="imagenesodoo_evidencia" filename="imagen_name"  string="Imagenes Odoo"></field>
+                 </group>
+
+                 <group>
+
+                    <field name="conflicto" widget="boolean_toggle" string="Presenta Documentos"  />
+                     <!-- es widget boolean_toggel da efecto de interruptor -->
+                     <field name="documento_name" invisible="1"></field>
+                     <!-- para conservar el nombre de documento se renderiza la variable creada y se asoscia al campo binario con en atributo filename  -->
+                     <field name="documento" filename="documento_name" string="Documentos" attrs ="{'invisible':[('conflicto','=',False)]}" /> 
+                      <field name="link" widget="url" string="link"/>                  
+                 </group>
+                     
                 </group>
                                    
+                </sheet>
+                <sheet>                
+                
                 </sheet>
                
             </form>
