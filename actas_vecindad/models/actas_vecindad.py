@@ -44,11 +44,14 @@ class actas(models.Model):
     )
     
     #funciones de botones
+    def nuevo(self):
+        self.state="nuevo"
+     
     def activo(self):
-        print("hola odoo")
+        self.state="activo"
                  
     def cancelado(self):
-        print("hola odoo")
+        self.state="cerrado"
                  
             
     

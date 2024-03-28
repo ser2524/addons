@@ -5,16 +5,17 @@
         <field name="name">actas.view.form</field>
         <field name="model">actas_vecindad</field>
         <field name="arch" type="xml">
-              <header style="display:flex">
+             
+            <form string="Actas">
+            <header style="display:flex">
+              <button string="Nuevo" name="nuevo" type="object" />
               <button string="Activo" name="activo" type="object" class="oe_highlight"/>
-              <button string="Cancelado" name="cancelado" type="object"/>
+              <button string="Cancelado" name="cancelado" type="object" />
+              
               <field name="state" 
                 widget="statusbar" statusbar_visible="nuevo,activo" 
-                ></field>
-                
-                </header>
-            <form string="Actas">
-                
+                ></field>                
+            </header>
                 <sheet>
                 <!-- el witget web_ribbon es para crear la cinta  -->
                 <widget name="web_ribbon" title= "Archivado" bg_color ="bg-danger" attrs ="{'invisible':[('active','=',True),]}"/>
