@@ -11,9 +11,13 @@
               <button string="Nuevo" name="nuevo" type="object" />
               <button string="Activo" name="activo" type="object" class="oe_highlight"/>
             <!-- estos son botones se usan para activar funciones y cambiar registros segun la configuracion, se puede llamar objetos , o aciones -->
-              <button string="Cancelado" name="cancelado" type="object" />
+              <button string="Cancelado" name="cancelado" type="object" confirm="esta seguro de querer cancelar, recuerde que no se puede revertir en la interface" />
               <field name="state"
-                widget="statusbar" statusbar_visible="nuevo,activo"></field>
+                widget="statusbar" statusbar_visible="nuevo,activo,cancelado"></field>
+              </header>
+                  <div class="alert alert-info" role="alert" style="margin-bottom: 0;" attrs ="{'invisible':[('calificacion_alerta','=',True)]}" >
+                          <field name="calificacion_alerta"  readonly="1" force_save="1"         ></field>
+                  </div>
                 <sheet>
                 <!-- el witget web_ribbon es para crear la cinta  -->
                 <widget name="web_ribbon" title= "Archivado" bg_color ="bg-danger" attrs ="{'invisible':[('active','=',True),]}"/>
@@ -36,7 +40,7 @@
                         <!-- para crear dominios se utiliza []esto crea un filtro segun la condicion  que necesitemos -->
                         <field name="encargado_user"/>
                         <field name="fecha_acta" attrs ="{'readonly':[('state','!=','nuevo')]}"></field>
-
+                        <field name="calificacion"></field>
                       </group>
                       <group>
 
@@ -64,10 +68,10 @@
                     <field name="documento_name" invisible="1"></field>
                     <!-- para conservar el nombre de documento se renderiza la variable creada y se asoscia al campo binario con en atributo filename  -->
                     <field name="documento" filename="documento_name" string="Documentos" attrs ="{'invisible':[('conflicto','=',False)]}" /> 
-                      <field name="link" widget="url" string="link"/>  
-                      <field name="fecha_activa" 
-                      readonly="1"
-                      ></field>
+                      <field name="link" widget="url" string="link"/>
+                      <field name="calificacion"></field>
+                      <field name="fecha_activa"    readonly="1" attrs ="{'invisible':[('state','!=','activo')]}"  ></field>
+                      <field name="fecha_cancelado"    readonly="1" attrs ="{'invisible':[('state','=','cancelado')]}"  ></field>
 
                 </group>
                 </group>
