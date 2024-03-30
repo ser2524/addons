@@ -2,20 +2,18 @@
 <odoo>
 
     <record id="actas_view_form" model="ir.ui.view">
+<!-- esto es un accion de para generar una vista -->
         <field name="name">actas.view.form</field>
         <field name="model">actas_vecindad</field>
         <field name="arch" type="xml">
-             
-            <form string="Actas">
-            <header style="display:flex">
+            <form string="Actas"  >
+            <header>
               <button string="Nuevo" name="nuevo" type="object" />
               <button string="Activo" name="activo" type="object" class="oe_highlight"/>
+            <!-- estos son botones se usan para activar funciones y cambiar registros segun la configuracion, se puede llamar objetos , o aciones -->
               <button string="Cancelado" name="cancelado" type="object" />
-              
-              <field name="state" 
-                widget="statusbar" statusbar_visible="nuevo,activo" 
-                ></field>                
-            </header>
+              <field name="state"
+                widget="statusbar" statusbar_visible="nuevo,activo"></field>
                 <sheet>
                 <!-- el witget web_ribbon es para crear la cinta  -->
                 <widget name="web_ribbon" title= "Archivado" bg_color ="bg-danger" attrs ="{'invisible':[('active','=',True),]}"/>
@@ -25,58 +23,63 @@
                 <!-- PONER ICONO BUSCAR EN FONTAWESOME 4.7 EN INTERNET -->
                 <!-- <span class="fa fa-circle"></span>    -->
                 <h1>Actas</h1>
-                <div class="oe_title" ><h2><field name="name" placeholder="ACTA N°"  required="1" default ="1" ></field> </h2> </div>               
-                                       
+                <!-- la clase oe_titule le da color y enfacis al campo  -->
+                <div class="oe_title" ><h2><field name="name" placeholder="ACTA N°"  required="1" default ="1" ></field> </h2> </div>
                 <group >
-                    
+
                       <group>
-                       
-                        <field name="usuario_id"  domain="[('category_id', 'in', [encargado_user])]" ></field>
+
+                        <field name="usuario_id"
+                        options="{'no_create': True}"
+                          domain="[('category_id', 'in', [encargado_user])]" ></field>
                         <!-- lo que se usua es que se evalua el nombre del campo que requiero  -->
                         <!-- para crear dominios se utiliza []esto crea un filtro segun la condicion  que necesitemos -->
-                        
                         <field name="encargado_user"/>
-                        
-                       <field name="fecha_acta"></field> 
-                       
+                        <field name="fecha_acta" attrs ="{'readonly':[('state','!=','nuevo')]}"></field>
+
                       </group>
                       <group>
+
                         <field name="tipo_uso" ></field>
-                        <field name="valor_inmueble"></field>                        
+                        <field name="valor_inmueble" widget='monetary'></field>
                         <field name="notas_estado"></field>
 
-                        <field name="afectacion_view" string=" Afectación  "     class="oe_edit_only"  ></field>                        
-                        <field name="afectacion" widget="percentpie" string=" Afectación  "></field>                        
+                        <field name="afectacion_view" string=" Afectación  "     class="oe_edit_only"  ></field>
+                        <!-- la clasxe oe_edit_onli solo muestra el registro en modo edicion -->
+                        <field name="afectacion" widget="percentpie" string=" Afectación  "></field>
                         <!--para poder presentar el percent pie se requiere un campo adicional en el modelo y ponerle un atribito related=  -->
                         <field name="active" invisible ="1"></field>
 
-                     </group>
-                     
+                  </group>
                 </group>
                 <group  string="Evidencias" style="display:flex">
-                 <group >
+                  <group >
                     <field name="encargado" string=""></field>
-                    <field name="imagen_name" invisible="1"></field>
-                    <field name="imagenesodoo_evidencia" filename="imagen_name"  string="Imagenes Odoo"></field>
-                 </group>
+                </group>
 
-                 <group>
+                <group>
 
                     <field name="conflicto" widget="boolean_toggle" string="Presenta Documentos"  />
-                     <!-- es widget boolean_toggel da efecto de interruptor -->
-                     <field name="documento_name" invisible="1"></field>
-                     <!-- para conservar el nombre de documento se renderiza la variable creada y se asoscia al campo binario con en atributo filename  -->
-                     <field name="documento" filename="documento_name" string="Documentos" attrs ="{'invisible':[('conflicto','=',False)]}" /> 
-                      <field name="link" widget="url" string="link"/>                  
-                 </group>
-                     
+                    <!-- es widget boolean_toggel da efecto de interruptor -->
+                    <field name="documento_name" invisible="1"></field>
+                    <!-- para conservar el nombre de documento se renderiza la variable creada y se asoscia al campo binario con en atributo filename  -->
+                    <field name="documento" filename="documento_name" string="Documentos" attrs ="{'invisible':[('conflicto','=',False)]}" /> 
+                      <field name="link" widget="url" string="link"/>  
+                      <field name="fecha_activa" 
+                      readonly="1"
+                      ></field>
+
                 </group>
-                                   
+                </group>
                 </sheet>
-                <sheet>                
-                
+                <sheet>
+                  <group>
+                  <field name="imagen_name" invisible="1"></field>
+                  <field name="imagenesodoo_evidencia" filename="imagen_name"  string="Imagenes Odoo"></field>
+                  </group>
+                  <group >
+                  </group>
                 </sheet>
-               
             </form>
         </field>
     </record>
