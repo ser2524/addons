@@ -42,4 +42,4 @@ class actas(models.Model):
         self.state="activo"
         self.fecha_activa=fields.Datetime.now()
     def cancelado(self):
-        self.state="cerrado"
+        self.state="cerrado" 
