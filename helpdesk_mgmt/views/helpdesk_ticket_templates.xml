@@ -198,7 +198,7 @@
                             <t t-set="object" t-value="ticket" />
                         </t>
                     </div>
-                </div>
+b                                                                                                                                                                                                                                                                                                                                                                                         '0'                </div>
             </div>
             <div class="oe_structure mb32" />
         </t>

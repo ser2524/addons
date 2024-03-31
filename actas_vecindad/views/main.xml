@@ -13,11 +13,11 @@
             <!-- estos son botones se usan para activar funciones y cambiar registros segun la configuracion, se puede llamar objetos , o aciones -->
               <button string="Cancelado" name="cancelado" type="object" confirm="esta seguro de querer cancelar, recuerde que no se puede revertir en la interface" />
               <field name="state"
-                widget="statusbar" statusbar_visible="nuevo,activo,cancelado"></field>
+                widget="statusbar" statusbar_visible="nuevo,activo,cerrado" options="{'clickable': '1', 'fold_field': 'fold'}"></field>
               </header>
-                  <div class="alert alert-info" role="alert" style="margin-bottom: 0;" attrs ="{'invisible':[('calificacion_alerta','=',True)]}" >
+                  <!-- <div class="alert alert-info" role="alert" style="margin-bottom: 0;" attrs ="{'invisible':[('calificacion_alerta','=',True)]}" >
                           <field name="calificacion_alerta"  readonly="1" force_save="1"         ></field>
-                  </div>
+                  </div> -->
                 <sheet>
                 <!-- el witget web_ribbon es para crear la cinta  -->
                 <widget name="web_ribbon" title= "Archivado" bg_color ="bg-danger" attrs ="{'invisible':[('active','=',True),]}"/>
@@ -28,7 +28,7 @@
                 <!-- <span class="fa fa-circle"></span>    -->
                 <h1>Actas</h1>
                 <!-- la clase oe_titule le da color y enfacis al campo  -->
-                <div class="oe_title" ><h2><field name="name" placeholder="ACTA N°"  required="1" default ="1" ></field> </h2> </div>
+                <div class="oe_title" ><h2><field name="name" placeholder="ACTA N°"   readonly="1" ></field> </h2> </div>
                 <group >
 
                       <group>
@@ -56,33 +56,42 @@
 
                   </group>
                 </group>
-                <group  string="Evidencias" style="display:flex">
-                  <group >
-                    <field name="encargado" string=""></field>
-                </group>
-
-                <group>
-
-                    <field name="conflicto" widget="boolean_toggle" string="Presenta Documentos"  />
+                
+                <notebook>
+                      <page  string="Evidencias">
+                      <group>
+                      <field name="conflicto" widget="boolean_toggle" string="Presenta Documentos"  />
                     <!-- es widget boolean_toggel da efecto de interruptor -->
-                    <field name="documento_name" invisible="1"></field>
+                        <field name="documento_name" invisible="1"></field>
                     <!-- para conservar el nombre de documento se renderiza la variable creada y se asoscia al campo binario con en atributo filename  -->
-                    <field name="documento" filename="documento_name" string="Documentos" attrs ="{'invisible':[('conflicto','=',False)]}" /> 
+                      <field name="documento" filename="documento_name" string="Documentos" attrs ="{'invisible':[('conflicto','=',False)]}" /> 
                       <field name="link" widget="url" string="link"/>
                       <field name="calificacion"></field>
                       <field name="fecha_activa"    readonly="1" attrs ="{'invisible':[('state','!=','activo')]}"  ></field>
                       <field name="fecha_cancelado"    readonly="1" attrs ="{'invisible':[('state','=','cancelado')]}"  ></field>
-
-                </group>
-                </group>
+                      </group>
+                        
+                      </page>
+                      <page  string="novedades">
+                        
+                      </page>
+                      <page string="Otra informacion">
+                        
+                      </page>
+                  </notebook>
                 </sheet>
-                <sheet>
+                 <sheet>
+                 <!--
                   <group>
                   <field name="imagen_name" invisible="1"></field>
                   <field name="imagenesodoo_evidencia" filename="imagen_name"  string="Imagenes Odoo"></field>
                   </group>
                   <group >
-                  </group>
+                   <field name="encargado" string=""></field>
+                  </group> -->
+                  <!-- pestañas en odoo -->
+                  <!-- notebook contine pestañas -->         
+
                 </sheet>
             </form>
         </field>

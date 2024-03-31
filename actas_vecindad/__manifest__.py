@@ -9,6 +9,8 @@
         'contacts',
     ],
     'data': [
+        
+        'data/secuencias.xml',
         'data/categoria.xml',
        'views/menu.xml','views/main.xml',
      ],

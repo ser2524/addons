@@ -7,7 +7,9 @@ class actas(models.Model):
     _inherit =['image.mixin']# este es un modelo heredado para almacenar imágenes
     _name = 'actas_vecindad'
     _description = 'Actas de vecindad'
-    name = fields.Char(string='Actas')
+       
+    name = fields.Char()
+    
     usuario_id = fields.Many2one(comodel_name='res.partner', string='Usuario') #EL CMODEL ES EL LLAMADO DEL CAMPO
     #para filtra el modulo
     encargado_user = fields.Many2one(comodel_name='res.partner.category', string='Usuarios Encargado' , 
@@ -62,20 +64,29 @@ class actas(models.Model):
         # else:
         #         raise UserError('no se puede eliminar si  NO esta en estado cancelado.')
         #     #equivale a un brake
-        if self.state !="cerrado":
-            raise UserError('no se puede eliminar si  NO esta en estado cancelado.')
+        for record in self:
+            if record.state !="cerrado":
+                raise UserError('no se puede eliminar si  NO esta en estado cancelado.')
             super(actas, self).unlink()
             #equivale a un brake
-    # @api.onchange('calificacion')
-    # def _onchange_calificacion(self):
-    #     if self.calificacion:
-    #         if self.calificacion =="alto":
-    #             self.calificacion_alerta ='usuario colaborador'
-    #         if self.calificacion =="medio":
-    #             self.calificacion_alerta ='usuario de cuidado'
-    #         if self.calificacion =="bajo":
-    #             self.calificacion_alerta ='Alerta, usuario trafuga, alrta'
-    #         else:
-    #             self.calificacion_alerta= False
+    @api.model
+    def create(self,variables):
+        secuencia_actas_objeto = self.env['ir.sequence']
+        secuencia_actas_variable = secuencia_actas_objeto.next_by_code('secuencia_actas')
+        variables['name'] = secuencia_actas_variable
+        return super(actas, self).create(variables)
+    
+    
+    @api.onchange('calificacion')
+    def _onchange_calificacion(self):
+        if self.calificacion:
+            if self.calificacion =="alto":
+                self.calificacion_alerta ='usuario colaborador'
+            if self.calificacion =="medio":
+                self.calificacion_alerta ='usuario de cuidado'
+            if self.calificacion =="bajo":
+                self.calificacion_alerta ='Alerta, usuario trafuga, alrta'
+            else:
+                self.calificacion_alerta= False
 
 
