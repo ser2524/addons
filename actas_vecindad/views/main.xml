@@ -73,7 +73,7 @@
                         
                       </page>
                       <page  string="novedades">
-                        
+                        <field name="usuario_actas_category"/>
                       </page>
                       <page string="Otra informacion">
                         

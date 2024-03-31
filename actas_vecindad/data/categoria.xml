@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="categoria_sociales" model="res.partner.category">
+        <field name="name">Sociales</field>
+    </record>
+
+    <record id="categoria_ingenieros" model="res.partner.category">
+        <field name="name">Ingeniero</field>
+    </record>
+    <record id="categoria_oficiales" model="res.partner.category">
+        <field name="name">Oficiales</field>
+    </record>
+    <record id="categoria_obrero" model="res.partner.category">
+        <field name="name">Obrero</field>
+    </record>
+</odoo>
+
