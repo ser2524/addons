@@ -43,10 +43,10 @@ class actas(models.Model):
     )
     fecha_activa = fields.Datetime('Fecha Activado',copy=False)
     fecha_cancelado = fields.Datetime('Fecha cancelado',copy=False)
-    
-    usuarios_actas = fields.Many2one(comodel_name='res.partner', string='Usuario de actas')
-    usuario_actas_category = fields.Many2one(comodel_name='res.partner.category', string='Usuarios Encargado' , )
+    usuario_actas_ids = fields.Many2many(comodel_name='res.partner', string='Usuarios propiedades')
+    usuario_categorias_actas = fields.Many2one(comodel_name='res.partner.category', string='Usuarios Encargado' , 
                                      #default=lambda self : self.env['res.partner.category'].search([('name','=','Sociales')])                                     
+                                     default=lambda self : self.env.ref('actas_vecindad.categoria_usuario'))
 
     #funciones de botones
     def nuevo(self):

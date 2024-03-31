@@ -15,5 +15,8 @@
     <record id="categoria_obrero" model="res.partner.category">
         <field name="name">Obrero</field>
     </record>
+    <record id="categoria_usuario" model="res.partner.category">
+        <field name="name">Usuario</field>
+    </record>
 </odoo>
 

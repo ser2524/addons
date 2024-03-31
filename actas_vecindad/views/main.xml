@@ -40,7 +40,6 @@
                         <!-- para crear dominios se utiliza []esto crea un filtro segun la condicion  que necesitemos -->
                         <field name="encargado_user"/>
                         <field name="fecha_acta" attrs ="{'readonly':[('state','!=','nuevo')]}"></field>
-                        <field name="calificacion"></field>
                       </group>
                       <group>
 
@@ -66,14 +65,14 @@
                     <!-- para conservar el nombre de documento se renderiza la variable creada y se asoscia al campo binario con en atributo filename  -->
                       <field name="documento" filename="documento_name" string="Documentos" attrs ="{'invisible':[('conflicto','=',False)]}" /> 
                       <field name="link" widget="url" string="link"/>
-                      <field name="calificacion"></field>
                       <field name="fecha_activa"    readonly="1" attrs ="{'invisible':[('state','!=','activo')]}"  ></field>
                       <field name="fecha_cancelado"    readonly="1" attrs ="{'invisible':[('state','=','cancelado')]}"  ></field>
                       </group>
                         
                       </page>
                       <page  string="novedades">
-                        <field name="usuario_actas_category"/>
+                        
+
                       </page>
                       <page string="Otra informacion">
                         

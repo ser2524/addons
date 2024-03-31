@@ -25,8 +25,9 @@ class imagenes(models.Model):
         string='actas',            
     )
     
-    
-        
-    
-    
-    
+
+class usuarios_actas_id(models.Model):
+      _inherit = 'res.partner'
+      usuarios_actas_id = fields.Char(string='Name', copy=False   )
+
+
