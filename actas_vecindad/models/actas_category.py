@@ -28,6 +28,6 @@ class imagenes(models.Model):
 
 class usuarios_actas_id(models.Model):
       _inherit = 'res.partner'
-      usuarios_actas_id = fields.Char(string='Name', copy=False   )
+      usuarios_actas_id = fields.Char(string='name', copy=False   )
 
 

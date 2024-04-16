@@ -43,10 +43,23 @@ class actas(models.Model):
     )
     fecha_activa = fields.Datetime('Fecha Activado',copy=False)
     fecha_cancelado = fields.Datetime('Fecha cancelado',copy=False)
+    
+    
     usuario_actas_ids = fields.Many2many(comodel_name='res.partner', string='Usuarios propiedades')
     usuario_categorias_actas = fields.Many2one(comodel_name='res.partner.category', string='Usuarios Encargado' , 
                                      #default=lambda self : self.env['res.partner.category'].search([('name','=','Sociales')])                                     
                                      default=lambda self : self.env.ref('actas_vecindad.categoria_usuario'))
+    observaciones = fields.Html(string='Observaciones')
+    
+    #relacion de uno a  muchos
+    detalles_id = fields.One2many(comodel_name='acta.detalle', inverse_name='actas_id', string='')
+    #el inverse name es la variable a la que le asinamos en el many2one del cmodel
+    
+    
+    ocultar_imagen = fields.Boolean(
+        string='ocultar_imagen',
+    )
+    
 
     #funciones de botones
     def nuevo(self):
@@ -80,8 +93,8 @@ class actas(models.Model):
         secuencia_actas_variable = secuencia_actas_objeto.next_by_code('secuencia_actas')
         variables['name'] = secuencia_actas_variable
         return super(actas, self).create(variables)
-    
-    
+
+
     @api.onchange('calificacion')
     def _onchange_calificacion(self):
         if self.calificacion:
@@ -93,6 +106,43 @@ class actas(models.Model):
                 self.calificacion_alerta ='Alerta, usuario trafuga, alrta'
             else:
                 self.calificacion_alerta= False
-                
+  
 
 
+
+
+class ActaPresupuesto(models.Model):
+    _name = 'acta.detalle'
+    #se hace una relacion entre cabecera y detalle, el detalle va a tener una relacion de many2one
+    #y el modelo detalle va a tener una relacion de one2many
+    
+    #many2one
+    actas_id = fields.Many2one('actas_vecindad', string='presupuesto')
+    
+    name = fields.Many2one(
+    comodel_name='actas.presupuesto'
+    , string='acta detallada'
+        )
+    descripcion = fields.Char(string='Descripción',related='name.description')
+    contacto_acta_detalle = fields.Many2one(comodel_name='res.partner', string='Contacto',related='name.contacto_id')
+    
+    imagen_acta = fields.Binary(
+        string='imagen_acta', related='name.imagenes_actas'
+    )    
+    cantidad = fields.Float(string='Precio',
+    default= 1.0,
+     digits=(16,2))
+    valor = fields.Float('valor', digits='Product Price')
+    importe = fields.Monetary(string='Importe', digits='Product Price')
+    currency_id = fields.Many2one(comodel_name='currency_id', string='Moneda')
+    
+    
+    
+    
+    @api.onchange('name')
+    def _onchange_name(self):
+        self.valor = self.name.valor
+        #TOMA DEL MODELO EL VALOR PARA ACTUALIZARLO EN EL DETALLE
+    @api.onchange('cantidad','valor')
+    def _onchange_(self):
+        self.importe = self.cantidad * self.valor

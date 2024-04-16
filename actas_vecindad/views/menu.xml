@@ -11,15 +11,16 @@
         <field name="res_model">tipo_uso</field>
         <field name="view_mode">tree,form</field>
     </record>
-    <!-- <record id="tipo_actas_action" model="ir.actions.act_window">
-        <field name="name">Tipo Uso</field>
-        <field name="res_model">tipo_uso</field>
+    <record id="user_actas_action" model="ir.actions.act_window">
+        <field name="name">presupuesto</field>
+        <field name="res_model">actas.presupuesto</field>
         <field name="view_mode">tree,form</field>
-    </record> -->
+    </record>
 
     <menuitem  id="actas_main_menu" name="Actas vecindad" />
     <menuitem  id="actas_horizontal_menu" name=" Mis actas" parent ="actas_main_menu" action ="actas_action" />
-    <menuitem  id="actas_tipo_menu_imagen" name="Tipo de Uso" parent ="actas_main_menu" action ="tipo_actas_action" />
+    <menuitem  id="actas_presupueto_menu" name="Presupuesto" parent ="actas_horizontal_menu" action ="user_actas_action" />
+    <menuitem  id="actas_tipo_menu_imagen" name="Tipo de Uso" parent ="actas_horizontal_menu" action ="tipo_actas_action" />
 
  
 </odoo>

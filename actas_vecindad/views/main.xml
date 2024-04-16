@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="actas_view_form" model="ir.ui.view">
+  <record id="actas_view_form" model="ir.ui.view">
 <!-- esto es un accion de para generar una vista -->
         <field name="name">actas.view.form</field>
         <field name="model">actas_vecindad</field>
@@ -28,7 +28,9 @@
                 <!-- <span class="fa fa-circle"></span>    -->
                 <h1>Actas</h1>
                 <!-- la clase oe_titule le da color y enfacis al campo  -->
-                <div class="oe_title" ><h2><field name="name" placeholder="ACTA N°"   readonly="1" ></field> </h2> </div>
+                <div class="oe_title" ><h2><field name="name"  
+                readonly="1"
+                    ></field> </h2> </div>
                 <group >
 
                       <group>
@@ -40,6 +42,10 @@
                         <!-- para crear dominios se utiliza []esto crea un filtro segun la condicion  que necesitemos -->
                         <field name="encargado_user"/>
                         <field name="fecha_acta" attrs ="{'readonly':[('state','!=','nuevo')]}"></field>
+                        <field name="ocultar_imagen" 
+                        widget="boolean_toggle"
+                        
+                        />
                       </group>
                       <group>
 
@@ -56,8 +62,34 @@
                   </group>
                 </group>
                 
+                <separator string="Detalles" colspan="4" />
+                
                 <notebook>
+                <page string="many2one" >
+                          <group>
+                        <field name="detalles_id">
+                        <tree  editable="bottom"  string="informacion de actas">
+                        <control><create name="add_product_control" string="Agregar detalles de actas"></create>                   </control>
+                            
+                            <field name="name"/>
+                            <field name="descripcion" optional="show" />
+                            <field name="cantidad" />
+                            <field name="valor"/>
+                            <field name="importe" 
+                            readonly="1" force_save="1" 
+                            />
+                            <field name="imagen_acta" widget="image" 
+                            options="{'size': [80,50]}" attrs="{'column_invisible':[('parent.ocultar_imagen','=',True)]}"
+                            />
+                            <!-- utilizo parent para llamar a los valores de donde saco el campo ocultar imagen -->
+                          </tree>
+                        
+                        
+                        </field>
+                      </group>
+                      </page>
                       <page  string="Evidencias">
+                      
                       <group>
                       <field name="conflicto" widget="boolean_toggle" string="Presenta Documentos"  />
                     <!-- es widget boolean_toggel da efecto de interruptor -->
@@ -68,32 +100,43 @@
                       <field name="fecha_activa"    readonly="1" attrs ="{'invisible':[('state','!=','activo')]}"  ></field>
                       <field name="fecha_cancelado"    readonly="1" attrs ="{'invisible':[('state','=','cancelado')]}"  ></field>
                       </group>
+                      
                         
                       </page>
-                      <page  string="novedades">
+                      <page  string="Usuarios">
+                        <group >
+                          <field name="usuario_actas_ids"
+                        options="{'no_create': True}"
+                          domain="[('category_id', 'in', [usuario_categorias_actas])]"  
+                          widget="many2many_tags"
+                          ></field>
+                        <!-- lo que se usua es que se evalua el nombre del campo que requiero  -->
+                        <!-- para crear dominios se utiliza []esto crea un filtro segun la condicion  que necesitemos -->
+                        <field name="usuario_categorias_actas" 
+                        invisible="1"
+                        />
+                        
+                        </group>
                         
 
                       </page>
                       <page string="Otra informacion">
-                        
+                      
+                      <separator string="Observaciones" colspan="4" />
+                          
+                      
+                        <field name="observaciones" string="Observaciones" />
                       </page>
+                      
+                      
+                      
                   </notebook>
                 </sheet>
-                 <sheet>
-                 <!--
-                  <group>
-                  <field name="imagen_name" invisible="1"></field>
-                  <field name="imagenesodoo_evidencia" filename="imagen_name"  string="Imagenes Odoo"></field>
-                  </group>
-                  <group >
-                   <field name="encargado" string=""></field>
-                  </group> -->
-                  <!-- pestañas en odoo -->
-                  <!-- notebook contine pestañas -->         
-
-                </sheet>
+                 
             </form>
         </field>
+        
     </record>
+
 
 </odoo>
